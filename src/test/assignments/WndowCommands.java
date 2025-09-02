@@ -21,14 +21,30 @@ public class WndowCommands {
         System.out.println("Size: "+windowSize);
 
         //Adjust the size and Position
-        driver.manage().window().setPosition(new Point(300,400));
+        Point newPosition=(new Point(300,400));
+        driver.manage().window().setPosition(newPosition);
         Thread.sleep(1000);
-        driver.manage().window().setSize(new Dimension(900,700));
+        Dimension newSize=new Dimension(900,700);
+        driver.manage().window().setSize(newSize);
         Thread.sleep(1000);
 
         //Test that the page is in the position and size
-        System.out.println("New Position: "+ driver.manage().window().getPosition());
-        System.out.println("New Size: "+driver.manage().window().getSize());
+        Point actualPosition=driver.manage().window().getPosition();
+        Dimension actualSize=driver.manage().window().getSize();
+
+        if (actualSize.equals(newSize)  && actualPosition.equals(newPosition)){
+            System.out.println("size and position changed sucessfuly!!!");
+        }
+        else {
+            System.out.println("size and position changed failed...");
+        }
+
+        System.out.println("New size: "+newSize);
+        System.out.println("New Position: "+newPosition);
+        System.out.println("actual Position: "+ driver.manage().window().getPosition());
+        System.out.println("actual Size: "+driver.manage().window().getSize());
+
+
 
         //Close the Window
         driver.quit();
